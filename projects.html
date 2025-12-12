@@ -8,6 +8,34 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="top-bar-left">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="top-bar-center">
+                <div class="top-bar-item">
+                    <i class="fas fa-phone"></i>
+                    <span>Call Us: <a href="tel:+918903809672">+91 8903809672</a></span>
+                </div>
+                <div class="top-bar-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Mail Us: <a href="mailto:er.ragavan.rv@gmail.com">er.ragavan.rv@gmail.com</a></span>
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <div class="top-bar-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Open Hours: Mon-Fri: 8am - 7pm</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container header-container">
@@ -20,13 +48,19 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="projects.html" class="active">Projects</a></li>
+                    <li><a href="index.html">Home <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="about.html">About <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="services.html">Services <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="projects.html" class="active">Projects <i class="fas fa-chevron-down"></i></a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
+            <div class="header-actions">
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <a href="contact.html" class="btn btn-quote">Request Quote</a>
+            </div>
         </div>
     </header>
 
@@ -34,44 +68,162 @@
     <section class="page-header">
         <div class="container">
             <h1>Our Projects</h1>
-            <p>Showcasing our completed construction projects</p>
+            <p>Home ▸ Projects</p>
+        </div>
+    </section>
+
+    <!-- Projects Intro Section -->
+    <section class="projects-intro">
+        <div class="container">
+            <div class="projects-intro-content">
+                <div class="intro-text">
+                    <span class="section-badge">Our Portfolio</span>
+                    <h2>Our Completed <span class="highlight">Projects</span></h2>
+                    <p>Explore our diverse portfolio of successfully completed construction projects. Each project represents our commitment to excellence, quality craftsmanship, and client satisfaction.</p>
+                </div>
+                <div class="portfolio-stats">
+                    <div class="portfolio-stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">230+</div>
+                            <div class="stat-label">Happy Clients</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Satisfaction Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
-            <div class="section-title">
-                <h2>Recent Projects</h2>
-                <p>Take a look at some of our recently completed construction projects.</p>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="residential">Residential</button>
+                <button class="filter-btn" data-filter="commercial">Commercial</button>
+                <button class="filter-btn" data-filter="renovation">Renovation</button>
             </div>
             <div class="projects-grid">
-                <div class="project-card" data-project="1">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3" alt="Residential Building">
+                <div class="project-card professional-project-card" data-project="1" data-category="residential">
+                    <div class="project-image-wrapper">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3" alt="Residential Building">
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-overlay-content">
+                                <a href="#project1-popup" class="project-view-btn">
+                                    <i class="fas fa-eye"></i> View Details
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-badge">
+                            <i class="fas fa-home"></i> Residential
+                        </div>
                     </div>
                     <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-location"><i class="fas fa-map-marker-alt"></i> Sholinganallur</span>
+                            <span class="project-year"><i class="fas fa-calendar"></i> 2022</span>
+                        </div>
                         <h3>Villa Construction - Sholinganallur</h3>
                         <p>Complete construction of a 3BHK luxury villa with modern amenities and premium finishes.</p>
+                        <div class="project-specs">
+                            <span><i class="fas fa-ruler-combined"></i> 2,500 Sq. Ft.</span>
+                            <span><i class="fas fa-bed"></i> 3 BHK</span>
+                        </div>
                     </div>
                 </div>
-                <div class="project-card" data-project="2">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3" alt="Commercial Building">
+                <div class="project-card professional-project-card" data-project="2" data-category="commercial">
+                    <div class="project-image-wrapper">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3" alt="Commercial Building">
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-overlay-content">
+                                <a href="#project2-popup" class="project-view-btn">
+                                    <i class="fas fa-eye"></i> View Details
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-badge">
+                            <i class="fas fa-building"></i> Commercial
+                        </div>
                     </div>
                     <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-location"><i class="fas fa-map-marker-alt"></i> Medavakkam</span>
+                            <span class="project-year"><i class="fas fa-calendar"></i> 2023</span>
+                        </div>
                         <h3>Commercial Complex - Medavakkam</h3>
                         <p>Construction of a 4-story commercial building with retail spaces and office facilities.</p>
+                        <div class="project-specs">
+                            <span><i class="fas fa-ruler-combined"></i> 8,000 Sq. Ft.</span>
+                            <span><i class="fas fa-layer-group"></i> 4 Floors</span>
+                        </div>
                     </div>
                 </div>
-                <div class="project-card" data-project="3">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3" alt="Home Renovation">
+                <div class="project-card professional-project-card" data-project="3" data-category="renovation">
+                    <div class="project-image-wrapper">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3" alt="Home Renovation">
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-overlay-content">
+                                <a href="#project3-popup" class="project-view-btn">
+                                    <i class="fas fa-eye"></i> View Details
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-badge">
+                            <i class="fas fa-hammer"></i> Renovation
+                        </div>
                     </div>
                     <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-location"><i class="fas fa-map-marker-alt"></i> Porur</span>
+                            <span class="project-year"><i class="fas fa-calendar"></i> 2023</span>
+                        </div>
                         <h3>Home Addition - Porur</h3>
                         <p>Second-floor addition and complete renovation of an existing residential property.</p>
+                        <div class="project-specs">
+                            <span><i class="fas fa-ruler-combined"></i> 1,200 Sq. Ft.</span>
+                            <span><i class="fas fa-plus-circle"></i> Addition</span>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="projects-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Have a Project in Mind?</h2>
+                <p>Let's discuss how we can bring your construction vision to life with our expertise and quality craftsmanship.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-cta-primary">Contact Us</a>
+                    <a href="services.html" class="btn btn-cta-secondary">View Our Services</a>
                 </div>
             </div>
         </div>

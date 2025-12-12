@@ -157,13 +157,65 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Project Popup Functionality
     document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function(e) {
+            // Don't trigger if clicking the view button (it has its own handler)
+            if (e.target.closest('.project-view-btn')) {
+                return;
+            }
             const projectId = this.getAttribute('data-project');
             const popup = document.getElementById(`project${projectId}-popup`);
             if (popup) {
                 popup.style.display = 'block';
                 document.body.style.overflow = 'hidden';
             }
+        });
+    });
+
+    // Project View Button Click Handler
+    document.querySelectorAll('.project-view-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const popupId = href.substring(1);
+                const popup = document.getElementById(popupId);
+                if (popup) {
+                    popup.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+        });
+    });
+
+    // Project Filter Functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.professional-project-card');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+
+            const filterValue = this.getAttribute('data-filter');
+
+            projectCards.forEach(card => {
+                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    }, 10);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
         });
     });
 
