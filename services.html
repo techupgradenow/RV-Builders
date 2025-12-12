@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - RV BUILDERS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images/rv-builders-logo.jpeg" alt="RV BUILDERS Logo">
+                <h1>RV <span>BUILDERS</span></h1>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Comprehensive construction and engineering solutions</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>What We Offer</h2>
+                <p>We offer a comprehensive range of construction and engineering services to meet all your building needs.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-service="planning">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Architectural Planning">
+                        <div class="service-icon">
+                            <i class="fas fa-drafting-compass"></i>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Planning</h3>
+                        <p>Professional architectural planning and design services to bring your construction vision to life.</p>
+                    </div>
+                </div>
+                <div class="service-card" data-service="3d-drawing">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="3D Architectural Drawing">
+                        <div class="service-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>3D Drawing</h3>
+                        <p>Advanced 3D architectural drawings and visualizations to help you visualize your project before construction.</p>
+                    </div>
+                </div>
+                <div class="service-card" data-service="building-construction">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Building Construction">
+                        <div class="service-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Building Construction</h3>
+                        <p>Complete construction services for residential and commercial buildings with quality materials and skilled workmanship.</p>
+                    </div>
+                </div>
+                <div class="service-card" data-service="civil-engineering">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Civil Engineering">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Civil Engineering Consulting</h3>
+                        <p>Professional engineering consultation for structural design, planning, and project management.</p>
+                    </div>
+                </div>
+                <div class="service-card" data-service="licensed-surveying">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Land Surveying">
+                        <div class="service-icon">
+                            <i class="fas fa-vector-square"></i>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Licensed Surveying</h3>
+                        <p>Accurate land surveying services for property boundaries and construction layouts.</p>
+                    </div>
+                </div>
+                <div class="service-card" data-service="renovation">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Renovation">
+                        <div class="service-icon">
+                            <i class="fas fa-hammer"></i>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Renovation & Remodeling</h3>
+                        <p>Complete renovation and remodeling services to transform your existing spaces.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Popups -->
+    <div class="popup" id="planning-popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <div>
+                    <h2 class="popup-title">Planning Services</h2>
+                    <p>Strategic architectural planning & feasibility</p>
+                </div>
+                <button class="popup-close">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div class="popup-image">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Planning Service">
+                </div>
+                <p>We provide comprehensive planning solutions covering conceptual layouts, approvals, budgeting, and execution strategies tailored for residential and commercial projects.</p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <h4>Deliverables</h4>
+                        <p>Concept plans, bylaws compliance, approvals</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Consultation</h4>
+                        <p>Detailed requirement workshops & site study</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Timeline</h4>
+                        <p>1-3 weeks depending on project scope</p>
+                    </div>
+                </div>
+                <h3>Highlights</h3>
+                <ul>
+                    <li>Feasibility analysis & risk assessment</li>
+                    <li>Municipality/DTCP/CMDA compliance guidance</li>
+                    <li>Structured project execution roadmap</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="3d-drawing-popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <div>
+                    <h2 class="popup-title">3D Drawing</h2>
+                    <p>Photorealistic visualization & walkthroughs</p>
+                </div>
+                <button class="popup-close">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div class="popup-image">
+                    <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="3D Drawing">
+                </div>
+                <p>Our 3D artists convert your designs into immersive visuals, helping you experience materials, lighting, and spatial flow before construction begins.</p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <h4>Outputs</h4>
+                        <p>Exterior & interior renders, elevations</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Formats</h4>
+                        <p>High-res images, flythrough videos</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Revisions</h4>
+                        <p>Up to 3 iteration cycles included</p>
+                    </div>
+                </div>
+                <h3>Highlights</h3>
+                <ul>
+                    <li>Material & color palette experimentation</li>
+                    <li>Accurate daylight & artificial lighting studies</li>
+                    <li>VR/AR-ready assets upon request</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="building-construction-popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <div>
+                    <h2 class="popup-title">Building Construction</h2>
+                    <p>Turnkey residential & commercial execution</p>
+                </div>
+                <button class="popup-close">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div class="popup-image">
+                    <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Building Construction">
+                </div>
+                <p>From foundation to finishing, our site engineers, supervisors, and skilled workforce manage every stage with strict quality, safety, and schedule control.</p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <h4>Scope</h4>
+                        <p>Structure, MEP, interiors, landscaping</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Quality</h4>
+                        <p>IS-code compliant materials & tests</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Monitoring</h4>
+                        <p>Weekly progress reports & client walkthroughs</p>
+                    </div>
+                </div>
+                <h3>Highlights</h3>
+                <ul>
+                    <li>Dedicated project manager & safety officer</li>
+                    <li>Transparent billing & milestone tracking</li>
+                    <li>Post-handover maintenance support</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="civil-engineering-popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <div>
+                    <h2 class="popup-title">Civil Engineering Consulting</h2>
+                    <p>Structural design & technical advisory</p>
+                </div>
+                <button class="popup-close">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div class="popup-image">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Civil Engineering Consulting">
+                </div>
+                <p>We deliver structural design, BOQ preparation, value engineering, and third-party audits to ensure your project is safe, optimized, and code-compliant.</p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <h4>Services</h4>
+                        <p>Structural analysis, peer review, MEP coordination</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Deliverables</h4>
+                        <p>Design drawings, calculation reports, BOQs</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Expertise</h4>
+                        <p>Residential, industrial & institutional projects</p>
+                    </div>
+                </div>
+                <h3>Highlights</h3>
+                <ul>
+                    <li>Licensed professional engineers on every assignment</li>
+                    <li>Seismic & wind load compliance analysis</li>
+                    <li>Value engineering to optimize cost & durability</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="licensed-surveying-popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <div>
+                    <h2 class="popup-title">Licensed Surveying</h2>
+                    <p>Precision land surveying & documentation</p>
+                </div>
+                <button class="popup-close">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div class="popup-image">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Licensed Surveying">
+                </div>
+                <p>Our licensed surveyors provide contour mapping, boundary verification, layout demarcation, and digital survey drawings for CMDA/DTCP submissions.</p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <h4>Equipment</h4>
+                        <p>Total station, DGPS, drone mapping</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Deliverables</h4>
+                        <p>AutoCAD drawings, KMZ files, reports</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Turnaround</h4>
+                        <p>2-5 days for most residential plots</p>
+                    </div>
+                </div>
+                <h3>Highlights</h3>
+                <ul>
+                    <li>Government-approved survey certificates</li>
+                    <li>Subdivision & land acquisition support</li>
+                    <li>On-site pegging & marking assistance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="renovation-popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <div>
+                    <h2 class="popup-title">Renovation & Remodeling</h2>
+                    <p>Transform existing spaces with modern finishes</p>
+                </div>
+                <button class="popup-close">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div class="popup-image">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Renovation Service">
+                </div>
+                <p>We reimagine interiors and facades while respecting the original structure. Services include additions, retrofitting, waterproofing, and premium finishes.</p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <h4>Scope</h4>
+                        <p>Structural changes, interiors, façade upgrades</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Process</h4>
+                        <p>Detailed site audit, design boards, phased execution</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Support</h4>
+                        <p>Warranty on workmanship & materials</p>
+                    </div>
+                </div>
+                <h3>Highlights</h3>
+                <ul>
+                    <li>Minimal disruption with phased scheduling</li>
+                    <li>Custom joinery, lighting & smart home upgrades</li>
+                    <li>Compliance upgrades for older buildings</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>RV BUILDERS</h3>
+                    <p>Planning, 3D Drawing, Building Construction. We execute your needs with precision and excellence in Kovilpatti and across Tamil Nadu.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Planning</a></li>
+                        <li><a href="services.html">3D Drawing</a></li>
+                        <li><a href="services.html">Building Construction</a></li>
+                        <li><a href="services.html">Civil Engineering Consulting</a></li>
+                        <li><a href="services.html">Licensed Surveying</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> D.No. 5/ 533N16, Nellai Madurai Main Road, Krishna Nagar, Kovilpatti, Thoothukudi, Tamilnadu, 628501</p>
+                    <p><i class="fas fa-phone"></i> +91 8903809672</p>
+                    <p><i class="fas fa-envelope"></i> er.ragavan.rv@gmail.com</p>
+                    <p><i class="fas fa-user"></i> Er. T. Seenivasaragavan., D.C.E.B.E.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 RV BUILDERS. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+
