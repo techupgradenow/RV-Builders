@@ -147,6 +147,72 @@
         </div>
     </section>
 
+    <!-- Video Introduction Section -->
+    <section id="video-intro" class="video-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Watch Our <span class="highlight">Introduction</span></h2>
+                <p>Discover how RV BUILDERS transforms your dreams into reality with quality construction and expert craftsmanship.</p>
+            </div>
+            <div class="video-wrapper">
+                <div class="video-container">
+                    <video id="intro-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
+                        <source src="video/intros.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay" id="video-overlay">
+                        <button class="play-btn" id="play-btn" aria-label="Play Video">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                    <div class="video-controls">
+                        <button class="video-control-btn" id="video-play-pause" aria-label="Play/Pause">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="video-progress">
+                            <div class="video-progress-bar" id="video-progress-bar"></div>
+                        </div>
+                        <button class="video-control-btn" id="video-mute" aria-label="Mute/Unmute">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <button class="video-control-btn" id="video-fullscreen" aria-label="Fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-info-item">
+                        <div class="video-info-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="video-info-content">
+                            <h4>200+</h4>
+                            <p>Projects Completed</p>
+                        </div>
+                    </div>
+                    <div class="video-info-item">
+                        <div class="video-info-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="video-info-content">
+                            <h4>25+</h4>
+                            <p>Years Experience</p>
+                        </div>
+                    </div>
+                    <div class="video-info-item">
+                        <div class="video-info-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="video-info-content">
+                            <h4>100%</h4>
+                            <p>Client Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about">
         <div class="container">
@@ -336,6 +402,16 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating Action Buttons (WhatsApp & Call) -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/918903809672" class="fab-btn whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+918903809672" class="fab-btn call-btn" aria-label="Call Us">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+    </div>
 
     <script src="js/main.js"></script>
 </body>
