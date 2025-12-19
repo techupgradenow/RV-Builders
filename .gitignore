@@ -1,0 +1,24 @@
+# Uploaded files - user content not tracked in version control
+Backend/uploads/
+
+# Logs
+Backend/logs/
+
+# PHP error logs
+*.log
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp

@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RV BUILDERS - Admin Panel</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --primary-dark: #d97706;
+            --primary-light: #fef3c7;
+            --dark: #1e293b;
+            --dark-light: #334155;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --success: #10b981;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --warning: #f59e0b;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            color: var(--dark);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .logo h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .logo h1 span {
+            color: var(--primary);
+        }
+
+        .logo small {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .header-link:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Status Badge */
+        .db-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--white);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+        }
+
+        .db-status.connected {
+            color: var(--success);
+        }
+
+        .db-status.disconnected {
+            color: var(--danger);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Grid Layout */
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Card */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark);
+        }
+
+        .card-header h2 i {
+            color: var(--primary);
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .form-group label .required {
+            color: var(--danger);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.2s;
+            background: var(--white);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .form-control::placeholder {
+            color: var(--gray-400);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        select.form-control {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.75rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        /* Image Upload */
+        .upload-zone {
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius);
+            padding: 2rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--gray-100);
+        }
+
+        .upload-zone:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .upload-zone.dragover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            transform: scale(1.01);
+        }
+
+        .upload-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .upload-icon i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .upload-text h4 {
+            font-size: 1rem;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .upload-text p {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+
+        .upload-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.25rem;
+            background: var(--primary);
+            color: var(--dark);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+
+        .upload-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Image Preview */
+        .image-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .preview-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-item .remove-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 24px;
+            height: 24px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .preview-item:hover .remove-btn {
+            opacity: 1;
+        }
+
+        .preview-item .primary-badge {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        .image-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            padding: 0.5rem;
+            background: var(--gray-100);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        .image-counter strong {
+            color: var(--dark);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--dark);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--gray-200);
+            color: var(--dark);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border: 1px solid var(--gray-200);
+        }
+
+        .project-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .project-card-image {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .project-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-card-image img {
+            transform: scale(1.05);
+        }
+
+        .project-card-image .image-count {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .project-card-body {
+            padding: 1rem;
+        }
+
+        .project-card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .project-card-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card-meta span {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .project-card-meta i {
+            width: 14px;
+            color: var(--primary);
+        }
+
+        .project-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: var(--gray-100);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        /* Category Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .badge-residential { background: #dbeafe; color: #1d4ed8; }
+        .badge-commercial { background: #ffedd5; color: #c2410c; }
+        .badge-renovation { background: #dcfce7; color: #15803d; }
+        .badge-interior { background: #fce7f3; color: #be185d; }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .action-btn-view {
+            background: var(--info);
+            color: white;
+        }
+
+        .action-btn-edit {
+            background: var(--success);
+            color: white;
+        }
+
+        .action-btn-delete {
+            background: var(--danger);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 700px;
+            margin: 2rem auto;
+            box-shadow: var(--shadow-lg);
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            background: var(--dark);
+            color: white;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .modal-header h3 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .modal-body {
+            padding: 1.25rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.25rem;
+            background: var(--gray-100);
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+
+        /* View Modal */
+        .view-image {
+            width: 100%;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1rem;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        .view-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .view-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .view-thumb:hover,
+        .view-thumb.active {
+            border-color: var(--primary);
+        }
+
+        .view-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .view-item {
+            background: var(--gray-100);
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--primary);
+        }
+
+        .view-item label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .view-item span {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .view-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .view-item.full-width span {
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-completed { background: #dcfce7; color: #15803d; }
+        .status-in_progress { background: #fef3c7; color: #b45309; }
+        .status-upcoming { background: #dbeafe; color: #1d4ed8; }
+
+        /* Alert */
+        .alert {
+            padding: 0.875rem 1rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+
+        .alert-danger {
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fca5a5;
+        }
+
+        .alert i {
+            font-size: 1.1rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--gray-500);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--gray-300);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            color: var(--gray-500);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Edit Images */
+        .edit-images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .edit-image-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .edit-image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .edit-image-item .delete-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 20px;
+            height: 20px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* No Images Note */
+        .no-images-note {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (min-width: 640px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-grid .full-width {
+                grid-column: 1 / -1;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .image-preview-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            body {
+                font-size: 15px;
+            }
+
+            .admin-grid {
+                grid-template-columns: 1fr 1.5fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-400);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">RV</div>
+                <h1>RV <span>BUILDERS</span><small>Admin Panel</small></h1>
+            </div>
+            <div class="header-actions">
+                <div class="db-status connected" id="dbStatus">
+                    <span class="status-dot"></span>
+                    <span id="statusText">Connected</span>
+                </div>
+                <a href="../../index.html" class="header-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>View Site</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <div id="alertContainer"></div>
+
+        <div class="admin-grid">
+            <!-- Add Project Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-plus-circle"></i> Add New Project</h2>
+                </div>
+                <div class="card-body">
+                    <form id="projectForm" enctype="multipart/form-data">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Project Title <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="title" name="title" required placeholder="Enter project title">
+                            </div>
+                            <div class="form-group">
+                                <label>Category <span class="required">*</span></label>
+                                <select class="form-control" id="category" name="category" required>
+                                    <option value="residential">Residential</option>
+                                    <option value="commercial">Commercial</option>
+                                    <option value="renovation">Renovation</option>
+                                    <option value="interior">Interior</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Description</label>
+                                <textarea class="form-control" id="description" name="description" placeholder="Enter project description..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Client Name</label>
+                                <input type="text" class="form-control" id="client_name" name="client_name" placeholder="Client name">
+                            </div>
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input type="text" class="form-control" id="location" name="location" placeholder="e.g., Chennai, Tamil Nadu">
+                            </div>
+                            <div class="form-group">
+                                <label>Project Date</label>
+                                <input type="date" class="form-control" id="project_date" name="project_date">
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" id="completion_status" name="completion_status">
+                                    <option value="completed">Completed</option>
+                                    <option value="in_progress">In Progress</option>
+                                    <option value="upcoming">Upcoming</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Featured Project</label>
+                                <select class="form-control" id="featured" name="featured">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label>Project Images (Max 5)</label>
+                            <div class="upload-zone" id="dropZone">
+                                <div class="upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="upload-text">
+                                    <h4>Drag & drop images here</h4>
+                                    <p>or click to browse files</p>
+                                </div>
+                                <label class="upload-btn">
+                                    <i class="fas fa-folder-open"></i> Choose Files
+                                    <input type="file" id="images" name="images[]" multiple accept="image/*" class="file-input">
+                                </label>
+                            </div>
+                            <div class="image-preview-grid" id="imagePreview"></div>
+                            <div class="image-counter" id="imageCounter" style="display: none;">
+                                <i class="fas fa-images"></i>
+                                <span><strong id="selectedCount">0</strong> / 5 images selected</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" id="submitBtn" style="margin-top: 1.5rem;">
+                            <i class="fas fa-save"></i> Save Project
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Projects List -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-th-large"></i> Projects</h2>
+                    <span id="projectCount" style="font-size: 0.85rem; color: var(--gray-500);"></span>
+                </div>
+                <div class="card-body">
+                    <div id="projectsList" class="projects-grid">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Loading projects...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- View Modal -->
+    <div class="modal" id="viewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-eye"></i> <span id="viewTitle">Project Details</span></h3>
+                <button class="modal-close" onclick="closeModal('viewModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="viewModalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('viewModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Edit Project</h3>
+                <button class="modal-close" onclick="closeModal('editModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editProjectForm" enctype="multipart/form-data">
+                    <input type="hidden" id="edit_id" name="id">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Project Title <span class="required">*</span></label>
+                            <input type="text" class="form-control" id="edit_title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category <span class="required">*</span></label>
+                            <select class="form-control" id="edit_category" name="category" required>
+                                <option value="residential">Residential</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="renovation">Renovation</option>
+                                <option value="interior">Interior</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Description</label>
+                            <textarea class="form-control" id="edit_description" name="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Client Name</label>
+                            <input type="text" class="form-control" id="edit_client_name" name="client_name">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" class="form-control" id="edit_location" name="location">
+                        </div>
+                        <div class="form-group">
+                            <label>Project Date</label>
+                            <input type="date" class="form-control" id="edit_project_date" name="project_date">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" id="edit_completion_status" name="completion_status">
+                                <option value="completed">Completed</option>
+                                <option value="in_progress">In Progress</option>
+                                <option value="upcoming">Upcoming</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Featured</label>
+                            <select class="form-control" id="edit_featured" name="featured">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label>Current Images (<span id="currentImageCount">0</span>/5)</label>
+                        <div class="edit-images-grid" id="editImagesGrid"></div>
+                    </div>
+
+                    <div class="form-group" id="addMoreImagesSection">
+                        <label>Add More Images</label>
+                        <label class="upload-btn" style="display: inline-flex;">
+                            <i class="fas fa-plus"></i> Add Images
+                            <input type="file" id="edit_images" name="images[]" multiple accept="image/*" class="file-input">
+                        </label>
+                        <div class="image-preview-grid" id="editImagePreview"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('editModal')">Cancel</button>
+                <button class="btn btn-primary" id="updateBtn" onclick="updateProject()">
+                    <i class="fas fa-save"></i> Update
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '../api';
+        const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=450&fit=crop';
+        let selectedFiles = [];
+        let projectsData = [];
+        let currentEditProject = null;
+        let editSelectedFiles = [];
+
+        // Show alert message
+        function showAlert(message, type = 'success') {
+            const container = document.getElementById('alertContainer');
+            const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+            container.innerHTML = `
+                <div class="alert alert-${type}">
+                    <i class="fas fa-${icon}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            setTimeout(() => container.innerHTML = '', 5000);
+        }
+
+        // Drag and drop
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('images');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(e => {
+            dropZone.addEventListener(e, ev => ev.preventDefault(), false);
+        });
+
+        ['dragenter', 'dragover'].forEach(e => {
+            dropZone.addEventListener(e, () => dropZone.classList.add('dragover'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(e => {
+            dropZone.addEventListener(e, () => dropZone.classList.remove('dragover'), false);
+        });
+
+        dropZone.addEventListener('drop', e => handleFiles(e.dataTransfer.files), false);
+        dropZone.addEventListener('click', e => {
+            if (!e.target.closest('.upload-btn')) fileInput.click();
+        });
+        fileInput.addEventListener('change', e => handleFiles(e.target.files));
+
+        function handleFiles(files) {
+            const newFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
+            if (!newFiles.length) {
+                showAlert('Please select valid image files', 'danger');
+                return;
+            }
+            if (selectedFiles.length + newFiles.length > 5) {
+                showAlert(`Maximum 5 images! You can add ${5 - selectedFiles.length} more.`, 'danger');
+                return;
+            }
+            selectedFiles = [...selectedFiles, ...newFiles].slice(0, 5);
+            updatePreview();
+        }
+
+        function updatePreview() {
+            const preview = document.getElementById('imagePreview');
+            const counter = document.getElementById('imageCounter');
+            const count = document.getElementById('selectedCount');
+
+            preview.innerHTML = '';
+            if (selectedFiles.length) {
+                counter.style.display = 'flex';
+                count.textContent = selectedFiles.length;
+                selectedFiles.forEach((file, i) => {
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        preview.innerHTML += `
+                            <div class="preview-item">
+                                <img src="${e.target.result}" alt="Preview">
+                                <button type="button" class="remove-btn" onclick="removeImage(${i})">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                ${i === 0 ? '<span class="primary-badge">Primary</span>' : ''}
+                            </div>
+                        `;
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                counter.style.display = 'none';
+            }
+        }
+
+        function removeImage(index) {
+            selectedFiles.splice(index, 1);
+            updatePreview();
+        }
+
+        // Submit form
+        document.getElementById('projectForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+
+            const formData = new FormData(this);
+            formData.delete('images[]');
+            selectedFiles.forEach(f => formData.append('images[]', f));
+
+            try {
+                const res = await fetch(`${API_BASE}/projects.php`, { method: 'POST', body: formData });
+                const data = await res.json();
+                if (data.success) {
+                    showAlert(`Project created! ${data.uploaded_images || 0} images uploaded.`);
+                    this.reset();
+                    selectedFiles = [];
+                    updatePreview();
+                    loadProjects();
+                } else {
+                    showAlert(data.message || 'Failed to create project', 'danger');
+                }
+            } catch (err) {
+                showAlert('Error: ' + err.message, 'danger');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-save"></i> Save Project';
+            }
+        });
+
+        // Load projects
+        async function loadProjects() {
+            const container = document.getElementById('projectsList');
+            try {
+                const res = await fetch(`${API_BASE}/projects.php`);
+                const data = await res.json();
+
+                if (data.success && data.data?.length) {
+                    projectsData = data.data;
+                    document.getElementById('projectCount').textContent = `${data.data.length} projects`;
+                    container.innerHTML = data.data.map(p => {
+                        const img = p.images?.[0]?.image_url || DEFAULT_IMAGE;
+                        const imgCount = p.images?.length || 0;
+                        return `
+                            <div class="project-card">
+                                <div class="project-card-image">
+                                    <img src="${img}" alt="${p.title}" onerror="this.src='${DEFAULT_IMAGE}'">
+                                    <span class="image-count"><i class="fas fa-images"></i> ${imgCount}</span>
+                                </div>
+                                <div class="project-card-body">
+                                    <h3 class="project-card-title">${p.title}</h3>
+                                    <div class="project-card-meta">
+                                        <span><i class="fas fa-map-marker-alt"></i> ${p.location || 'Not specified'}</span>
+                                        <span><i class="fas fa-user"></i> ${p.client_name || 'Not specified'}</span>
+                                    </div>
+                                </div>
+                                <div class="project-card-footer">
+                                    <span class="badge badge-${p.category}">${p.category}</span>
+                                    <div class="action-buttons">
+                                        <button class="action-btn action-btn-view" onclick="viewProject(${p.id})" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn action-btn-edit" onclick="editProject(${p.id})" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn action-btn-delete" onclick="deleteProject(${p.id})" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    projectsData = [];
+                    document.getElementById('projectCount').textContent = '';
+                    container.innerHTML = `
+                        <div class="empty-state" style="grid-column: 1/-1;">
+                            <i class="fas fa-folder-open"></i>
+                            <h4>No Projects Yet</h4>
+                            <p>Add your first project using the form</p>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Failed to Load</h4>
+                        <p>Check database connection</p>
+                    </div>
+                `;
+            }
+        }
+
+        // View project
+        function viewProject(id) {
+            const p = projectsData.find(x => x.id === id);
+            if (!p) return;
+
+            document.getElementById('viewTitle').textContent = p.title;
+            const imgs = p.images || [];
+            const mainImg = imgs[0]?.image_url || DEFAULT_IMAGE;
+
+            const thumbs = imgs.length > 1 ? `
+                <div class="view-thumbnails">
+                    ${imgs.map((img, i) => `
+                        <img src="${img.image_url}" class="view-thumb ${i === 0 ? 'active' : ''}"
+                            onclick="changeMainImage(this, '${img.image_url}')" onerror="this.src='${DEFAULT_IMAGE}'">
+                    `).join('')}
+                </div>
+            ` : '';
+
+            const noImgNote = !imgs.length ? `
+                <div class="no-images-note">
+                    <i class="fas fa-info-circle"></i> No images uploaded
+                </div>
+            ` : '';
+
+            const status = { completed: 'Completed', in_progress: 'In Progress', upcoming: 'Upcoming' };
+            const category = { residential: 'Residential', commercial: 'Commercial', renovation: 'Renovation', interior: 'Interior' };
+
+            document.getElementById('viewModalBody').innerHTML = `
+                <img src="${mainImg}" class="view-image" id="viewMainImage" onerror="this.src='${DEFAULT_IMAGE}'">
+                ${thumbs}
+                ${noImgNote}
+                <div class="view-details">
+                    <div class="view-item">
+                        <label>Category</label>
+                        <span><span class="badge badge-${p.category}">${category[p.category] || p.category}</span></span>
+                    </div>
+                    <div class="view-item">
+                        <label>Status</label>
+                        <span class="status-badge status-${p.completion_status}">${status[p.completion_status] || 'N/A'}</span>
+                    </div>
+                    <div class="view-item">
+                        <label>Client</label>
+                        <span>${p.client_name || 'Not specified'}</span>
+                    </div>
+                    <div class="view-item">
+                        <label>Location</label>
+                        <span>${p.location || 'Not specified'}</span>
+                    </div>
+                    <div class="view-item">
+                        <label>Date</label>
+                        <span>${p.project_date ? new Date(p.project_date).toLocaleDateString('en-IN', {year: 'numeric', month: 'long', day: 'numeric'}) : 'Not specified'}</span>
+                    </div>
+                    <div class="view-item">
+                        <label>Featured</label>
+                        <span>${p.featured == 1 ? '<i class="fas fa-star" style="color: var(--primary);"></i> Yes' : 'No'}</span>
+                    </div>
+                    <div class="view-item full-width">
+                        <label>Description</label>
+                        <span>${p.description || 'No description'}</span>
+                    </div>
+                </div>
+            `;
+            openModal('viewModal');
+        }
+
+        function changeMainImage(thumb, url) {
+            document.getElementById('viewMainImage').src = url;
+            document.querySelectorAll('.view-thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+
+        // Edit project
+        function editProject(id) {
+            const p = projectsData.find(x => x.id === id);
+            if (!p) return;
+
+            currentEditProject = p;
+            editSelectedFiles = [];
+
+            document.getElementById('edit_id').value = p.id;
+            document.getElementById('edit_title').value = p.title || '';
+            document.getElementById('edit_category').value = p.category || 'residential';
+            document.getElementById('edit_description').value = p.description || '';
+            document.getElementById('edit_client_name').value = p.client_name || '';
+            document.getElementById('edit_location').value = p.location || '';
+            document.getElementById('edit_project_date').value = p.project_date || '';
+            document.getElementById('edit_completion_status').value = p.completion_status || 'completed';
+            document.getElementById('edit_featured').value = p.featured || '0';
+
+            const imgs = p.images || [];
+            document.getElementById('currentImageCount').textContent = imgs.length;
+            document.getElementById('editImagesGrid').innerHTML = imgs.length ? imgs.map(img => `
+                <div class="edit-image-item" id="img-${img.id}">
+                    <img src="${img.image_url}" onerror="this.src='${DEFAULT_IMAGE}'">
+                    <button type="button" class="delete-btn" onclick="deleteProjectImage(${img.id})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('') : '<p style="color: var(--gray-500); font-size: 0.85rem;">No images</p>';
+
+            document.getElementById('addMoreImagesSection').style.display = imgs.length >= 5 ? 'none' : 'block';
+            document.getElementById('editImagePreview').innerHTML = '';
+            document.getElementById('edit_images').value = '';
+
+            openModal('editModal');
+        }
+
+        document.getElementById('edit_images').addEventListener('change', function(e) {
+            const current = currentEditProject?.images?.length || 0;
+            const newFiles = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
+            if (newFiles.length > 5 - current) {
+                showAlert(`Can only add ${5 - current} more image(s)`, 'danger');
+                this.value = '';
+                return;
+            }
+            editSelectedFiles = newFiles;
+            const preview = document.getElementById('editImagePreview');
+            preview.innerHTML = '';
+            newFiles.forEach((file, i) => {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    preview.innerHTML += `<div class="preview-item"><img src="${e.target.result}"></div>`;
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        async function deleteProjectImage(imageId) {
+            if (!confirm('Delete this image?')) return;
+            try {
+                const res = await fetch(`${API_BASE}/projects.php?action=image&image_id=${imageId}`, { method: 'DELETE' });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById(`img-${imageId}`).remove();
+                    const count = parseInt(document.getElementById('currentImageCount').textContent) - 1;
+                    document.getElementById('currentImageCount').textContent = count;
+                    if (count < 5) document.getElementById('addMoreImagesSection').style.display = 'block';
+                    if (currentEditProject?.images) {
+                        currentEditProject.images = currentEditProject.images.filter(i => i.id !== imageId);
+                    }
+                    showAlert('Image deleted');
+                } else {
+                    showAlert(data.message || 'Failed to delete', 'danger');
+                }
+            } catch (err) {
+                showAlert('Error deleting image', 'danger');
+            }
+        }
+
+        async function updateProject() {
+            const btn = document.getElementById('updateBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+
+            const formData = new FormData(document.getElementById('editProjectForm'));
+            formData.delete('images[]');
+            editSelectedFiles.forEach(f => formData.append('images[]', f));
+
+            try {
+                const res = await fetch(`${API_BASE}/projects.php?id=${document.getElementById('edit_id').value}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showAlert('Project updated!');
+                    closeModal('editModal');
+                    loadProjects();
+                } else {
+                    showAlert(data.message || 'Update failed', 'danger');
+                }
+            } catch (err) {
+                showAlert('Error: ' + err.message, 'danger');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-save"></i> Update';
+            }
+        }
+
+        async function deleteProject(id) {
+            if (!confirm('Delete this project and all images?')) return;
+            try {
+                const res = await fetch(`${API_BASE}/projects.php?id=${id}`, { method: 'DELETE' });
+                const data = await res.json();
+                if (data.success) {
+                    showAlert('Project deleted!');
+                    loadProjects();
+                } else {
+                    showAlert(data.message || 'Delete failed', 'danger');
+                }
+            } catch (err) {
+                showAlert('Error: ' + err.message, 'danger');
+            }
+        }
+
+        // Modal functions
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.querySelectorAll('.modal').forEach(m => {
+            m.addEventListener('click', e => {
+                if (e.target === m) closeModal(m.id);
+            });
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(m => closeModal(m.id));
+            }
+        });
+
+        // Check database
+        async function checkDatabase() {
+            const status = document.getElementById('dbStatus');
+            const text = document.getElementById('statusText');
+            try {
+                const res = await fetch(`${API_BASE}/projects.php`);
+                const data = await res.json();
+                if (data.success) {
+                    status.classList.remove('disconnected');
+                    status.classList.add('connected');
+                    text.textContent = 'Connected';
+                } else {
+                    status.classList.remove('connected');
+                    status.classList.add('disconnected');
+                    text.textContent = 'Setup Required';
+                    // Auto setup
+                    await fetch(`${API_BASE}/setup.php`);
+                    loadProjects();
+                }
+            } catch (err) {
+                status.classList.remove('connected');
+                status.classList.add('disconnected');
+                text.textContent = 'Disconnected';
+            }
+        }
+
+        // Init
+        checkDatabase();
+        loadProjects();
+    </script>
+</body>
+</html>
